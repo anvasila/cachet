@@ -33,6 +33,29 @@
                             <label for="incident-name">{{ trans('forms.incidents.name') }}</label>
                             <input type="text" class="form-control" name="name" id="incident-name" required value="{{ Binput::old('incident.name') }}">
                         </div>
+
+                        <!-- NEW -->
+                        @if(!$components_in_groups->isEmpty() || !$components_out_groups->isEmpty())
+                        <div class="form-group">
+                            <label>{{ trans('forms.incidents.component') }}</label>
+                            <select name='component_id' class='form-control'>
+                                <option value='0' selected></option>
+                                @foreach($components_in_groups as $group)
+                                <optgroup label="{{ $group->name }}">
+                                    @foreach($group->components as $component)
+                                    <option value='{{ $component->id }}'>{{ $component->name }}</option>
+                                    @endforeach
+                                </optgroup>
+                                @endforeach
+                                @foreach($components_out_groups as $component)
+                                <option value='{{ $component->id }}'>{{ $component->name }}</option>
+                                @endforeach
+                            </select>
+                            <span class='help-block'>{{ trans('forms.optional') }}</span>
+                        </div>
+                        @endif
+                        <!-- NEW -->
+
                         <div class="form-group">
                             <label>{{ trans('forms.incidents.message') }}</label>
                             <div class='markdown-control'>

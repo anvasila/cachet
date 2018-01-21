@@ -48,13 +48,21 @@ class ReportMaintenanceCommandHandler
     {
         $scheduledAt = $this->dates->create('d/m/Y H:i', $command->timestamp);
 
-        $maintenanceEvent = Incident::create([
+        $data = [
             'name'         => $command->name,
             'message'      => $command->message,
             'scheduled_at' => $scheduledAt,
             'status'       => 0,
             'visible'      => 1,
-        ]);
+        ];
+
+        // Link with the component.
+        if ($command->component_id) {
+            $data['component_id'] = $command->component_id;
+        }
+
+        // Create the incident
+        $maintenanceEvent = Incident::create($data);
 
         $maintenanceEvent->notify = (bool) $command->notify;
 

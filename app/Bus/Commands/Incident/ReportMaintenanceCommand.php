@@ -42,6 +42,13 @@ final class ReportMaintenanceCommand
     public $timestamp;
 
     /**
+     * The Maintenance component.
+     *
+     * @var int
+     */
+    public $component_id;
+
+    /**
      * The validation rules.
      *
      * @var string[]
@@ -51,6 +58,7 @@ final class ReportMaintenanceCommand
         'message'   => 'string',
         'notify'    => 'bool',
         'timestamp' => 'string',
+        'component_id' => 'int|required_with:component_status',
     ];
 
     /**
@@ -63,11 +71,12 @@ final class ReportMaintenanceCommand
      *
      * @return void
      */
-    public function __construct($name, $message, $notify, $timestamp)
+    public function __construct($name, $message, $component_id, $notify, $timestamp)
     {
         $this->name = $name;
         $this->message = $message;
         $this->notify = $notify;
         $this->timestamp = $timestamp;
+        $this->component_id = $component_id;
     }
 }
