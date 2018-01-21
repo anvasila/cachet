@@ -7,7 +7,7 @@
         </div>
         @endif
         @if($incident->component)
-        <span class="label label-default">{{ $incident->component->name }}</span>
+        <span class="label label-default">{{ $incident->component->name }}</span><br/>
         @endif
         <strong>{{ $incident->name }}</strong>{{ $incident->isScheduled ? trans("cachet.incidents.scheduled_at", ["timestamp" => $incident->timestamp_datetime]) : null }}
         <br>
