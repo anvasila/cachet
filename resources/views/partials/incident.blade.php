@@ -9,13 +9,13 @@
         @if($incident->component)
         <span class="label label-default">{{ $incident->component->name }}</span>
         @endif
-        <strong>{{ $incident->name }}</strong>{{ $incident->isScheduled ? trans("cachet.incidents.scheduled_at", ["timestamp" => $incident->scheduled_at_diff]) : null }}
+        <strong>{{ $incident->name }}</strong>{{ $incident->isScheduled ? trans("cachet.incidents.scheduled_at", ["timestamp" => $incident->timestamp_datetime]) : null }}
         <br>
         <small class="date">
             @if($with_link)
-            <a href="{{ route('incident', ['id' => $incident->id]) }}" class="links"><abbr class="timeago" data-toggle="tooltip" data-placement="right" title="{{ $incident->timestamp_formatted }}" data-timeago="{{ $incident->timestamp_iso }}"></abbr></a>
+            <a href="{{ route('incident', ['id' => $incident->id]) }}" class="links"><abbr class="" data-toggle="tooltip" data-placement="right" title="{{ $incident->timestamp_formatted }}">{{ $incident->timestamp_datetime }}</abbr></a>
             @else
-            <abbr class="timeago" data-toggle="tooltip" data-placement="right" title="{{ $incident->timestamp_formatted }}" data-timeago="{{ $incident->timestamp_iso }}"></abbr>
+            <abbr class="" data-toggle="tooltip" data-placement="right" title="{{ $incident->timestamp_formatted }}">{{ $incident->timestamp_datetime }}</abbr>
             @endif
         </small>
     </div>
