@@ -23,15 +23,9 @@
 </div>
 @endif
 
-@if(!$scheduled_maintenance->isEmpty())
-<div class="section-scheduled">
-    @include('partials.schedule')
-</div>
-@endif
-
 @if($days_to_show > 0)
 <div class="section-timeline">
-    <h1>{{ trans('cachet.incidents.past') }}</h1>
+    <h1>{{ trans('cachet.incidents.past_and_future') }}</h1>
     @foreach($all_incidents as $date => $incidents)
     @include('partials.incidents', [compact($date), compact($incidents)])
     @endforeach
