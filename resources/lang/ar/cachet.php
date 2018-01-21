@@ -36,7 +36,7 @@ return [
             0 => 'Scheduled', // TODO: Hopefully remove this.
             1 => 'Investigating',
             2 => 'Identified',
-            3 => 'Watching',
+            3 => 'Monitoring',
             4 => 'Fixed',
         ],
     ],
