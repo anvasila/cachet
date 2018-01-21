@@ -65,27 +65,15 @@ class SendMaintenanceEmailNotificationHandler
             return;
         }
 
-        // First notify all global subscribers.
-        $globalSubscribers = $this->subscriber->isVerified()->isGlobal()->get();
-
-        foreach ($globalSubscribers as $subscriber) {
-            $this->notify($event, $subscriber);
-        }
-
         if (!$event->incident->component) {
             return;
         }
-
-        $notified = $globalSubscribers->pluck('id')->all();
 
         // Notify the remaining component specific subscribers.
         $componentSubscribers = $this->subscriber
             ->isVerified()
             ->forComponent($event->incident->component->id)
-            ->get()
-            ->reject(function ($subscriber) use ($notified) {
-                return in_array($subscriber->id, $notified);
-            });
+            ->get();
 
         foreach ($componentSubscribers as $subscriber) {
             $this->notify($event, $subscriber);
